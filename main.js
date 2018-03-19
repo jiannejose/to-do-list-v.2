@@ -11,7 +11,7 @@ function cursorFocus() {
 
 /* Rebinding Buttons Start */
 function rebindButtons() {
-  
+  deletingTask();
 }
 
 /* Rebinding Buttons End */
@@ -36,8 +36,25 @@ function addTask(e) {
           <button class="done">Done</button>
       </div>
   </li> 
-  `;
-  
+  `; 
+
+  rebindButtons();
+}
+/* Add Task End */
+
+
+/* Delete Task Start */
+function deletingTask() {
+  let deleteTaskButtons = Array.from(document.getElementsByClassName('delete'));
+
+  deleteTaskButtons.forEach((deleteTaskButton) => {
+    deleteTaskButton.addEventListener('click', deleteTask);
+  });
 }
 
-/* Add Task End */
+function deleteTask() {
+  let grandparentElement = this.parentElement.parentElement;
+  
+  grandparentElement.remove();
+}
+/* Delete Task End */
