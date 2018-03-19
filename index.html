@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <title>To-Do List Version 2</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+            }
+
+            main {
+                width: 300px;
+                margin: 15px auto;
+                padding: 20px;
+                border: 2px solid burlywood;
+            }
+
+            h1 {
+                text-align: center;
+                margin-bottom: 15px;
+            }
+
+            .add-task__container,
+            .list-container {
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid beige;
+            }
+
+            h3,
+            h4 {
+                padding: 10px 0;
+            }
+
+            li:not(:first-child) {
+                padding-top: 10px;
+            }
+
+            input {
+                margin: 5px 0;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <main>
+            <h1>To-Do List</h1>
+
+            <form class="add-task__container">
+                <input type="text" placeholder="Enter Task" name="task-input" id="taskInput" />
+                <button type="submit">Add</button>
+            </form>
+
+            <div class="list-container">
+                <h3>Tasks</h3>
+
+                <ol id="incompleteTasks">
+                    <li>
+                        <h4>Task Name</h4>
+                        
+                        <div class="actions">
+                            <button class="edit">Edit</button>
+                            <button class="delete">Delete</button>
+                            <button class="done">Done</button>
+                        </div>
+                    </li>
+
+                    <li>
+                        <form class="rename-task__container">
+                            <input type="text" name="rename-task" value="Task Name" id="taskRename" />
+                            <button type="submit">Save</button>
+                        </form>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="list-container">
+                <h3>Completed Tasks</h3>
+
+                <ol id="completeTasks">
+                    <li>
+                        <h4>Task Name</h4>
+                        
+                        <div class="actions">
+                            <button class="edit">Edit</button>
+                            <button class="delete">Delete</button>
+                            <button class="undo">Undo</button>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+
+        </main>
+
+    </body>
+</html>
