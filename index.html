@@ -42,6 +42,10 @@
                 margin: 5px 0;
             }
 
+            button:hover {
+                cursor: pointer;
+            }
+
         </style>
     </head>
 
@@ -51,22 +55,13 @@
 
             <form class="add-task__container">
                 <input type="text" placeholder="Enter Task" name="task-input" id="taskInput" />
-                <button type="submit">Add</button>
+                <button type="submit" id="addButton">Add</button>
             </form>
 
             <div class="list-container">
                 <h3>Tasks</h3>
 
                 <ol id="incompleteTasks">
-                    <li>
-                        <h4>Task Name</h4>
-                        
-                        <div class="actions">
-                            <button class="edit">Edit</button>
-                            <button class="delete">Delete</button>
-                            <button class="done">Done</button>
-                        </div>
-                    </li>
 
                     <li>
                         <form class="rename-task__container">
@@ -95,5 +90,6 @@
 
         </main>
 
+        <script src="main.js"></script>
     </body>
 </html>
