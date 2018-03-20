@@ -23,6 +23,8 @@ function rebindButtons() {
   whenTaskDone();
 
   undoingDoneTask();
+
+  editingTask();
 }
 /* Rebinding Buttons End */
 
@@ -135,3 +137,43 @@ function undoDoneTask() {
   rebindButtons();
 }
 /* Undo Task End */
+
+
+/* Edit Name Start */ 
+function editingTask() {
+  let editTaskButtons = Array.from(document.getElementsByClassName('edit'));
+
+  editTaskButtons.forEach((editTaskButton) => {
+    editTaskButton.addEventListener('click', editTask);
+  });
+}
+
+function editTask() {
+  let grandparentElement = this.parentElement.parentElement;
+  let taskName = grandparentElement.querySelector('h4').innerHTML;
+  let grandparentElementH4 = grandparentElement.querySelector('h4');
+  
+  grandparentElementH4.remove();
+
+  grandparentElement.innerHTML = `
+  <form class="rename-task__container">
+      <input type="text" name="rename-task" value="${taskName}" autocomplete="off" />
+      <button type="submit">Save</button>
+  </form>
+  `;
+
+  let taskRenameInput = grandparentElement.querySelector('input');
+  taskRenameInput.focus();
+
+  moveCursorToEnd(taskRenameInput);
+
+}
+/* Edit Name End */
+
+/* Move Cursor to End */
+ function moveCursorToEnd(el) {
+	if (typeof el.selectionStart == "number") {
+		el.selectionStart = el.selectionEnd = el.value.length;
+	}
+}
+/* Move Cursor to End */
