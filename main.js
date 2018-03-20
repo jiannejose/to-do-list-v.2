@@ -21,6 +21,8 @@ function rebindButtons() {
   deletingTask();
 
   whenTaskDone();
+
+  undoingDoneTask();
 }
 /* Rebinding Buttons End */
 
@@ -35,7 +37,7 @@ function addTask(e) {
   e.preventDefault();
   
   incompleteTasksList.innerHTML+= `
-   <li>
+  <li>
       <h4>${inputTask.value}</h4>
       
       <div class="actions">
@@ -82,7 +84,7 @@ function whenTaskDone() {
 function taskDone() {
   let grandparentElement = this.parentElement.parentElement;
   let completedTaskField = document.getElementById('completeTasks');
-  let taskName = grandparentElement.querySelector('h4').outerHTML;
+  let taskName = grandparentElement.querySelector('h4').innerHTML;
 
   completedTaskField.innerHTML += `
     <li>
@@ -95,5 +97,41 @@ function taskDone() {
         </div>
     </li>
   `;
+
+  grandparentElement.remove();
+
+  rebindButtons();
 }
 /* Task Done End */
+
+
+/* Undo Task Start */
+function undoingDoneTask() {
+  let undoButtons = Array.from(document.getElementsByClassName('undo'));
+
+  undoButtons.forEach((undoButton) => {
+    undoButton.addEventListener('click', undoDoneTask);
+  });
+}
+
+function undoDoneTask() {
+  let grandparentElement = this.parentElement.parentElement;
+  let taskName = grandparentElement.querySelector('h4').innerHTML;
+
+  incompleteTasksList.innerHTML += `
+  <li>
+      <h4>${taskName}</h4>
+      
+      <div class="actions">
+          <button class="edit">Edit</button>
+          <button class="delete">Delete</button>
+          <button class="done">Done</button>
+      </div>
+  </li> 
+  `;
+
+  grandparentElement.remove();
+
+  rebindButtons();
+}
+/* Undo Task End */
