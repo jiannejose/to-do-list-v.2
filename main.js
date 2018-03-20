@@ -179,6 +179,7 @@ function editTask(e) {
 }
 /* Edit Name End */
 
+
 /* Move Cursor to End */
  function moveCursorToEnd(el) {
 	if (typeof el.selectionStart == "number") {
@@ -201,11 +202,12 @@ function saveTask(e) {
   e.preventDefault();
 
   let grandparentElement = this.parentElement.parentElement;
+  let tasksList = grandparentElement.parentElement;
   let newTaskName = grandparentElement.querySelector('input').value;
 
   if(newTaskName == '') {
     alert('Hi! Please enter the task\'s new name.');
-  } else {
+  } else if(tasksList.id == 'incompleteTasks') {
     grandparentElement.innerHTML = `
       <h4>${newTaskName}</h4>
       
@@ -214,9 +216,19 @@ function saveTask(e) {
           <button class="delete">Delete</button>
           <button class="done">Done</button>
       </div> 
-      `;
+    `;
+  } else if(tasksList.id == 'completeTasks') {
+    grandparentElement.innerHTML = `
+      <h4>${newTaskName}</h4>
+      
+      <div class="actions">
+          <button class="edit">Edit</button>
+          <button class="delete">Delete</button>
+          <button class="undo">Undo</button>
+      </div> 
+    `;
   }
-    
+
   rebindButtons();
 }
 /* Save Task End */
