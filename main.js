@@ -39,18 +39,22 @@ addTaskButton.addEventListener('click', addTask);
 
 function addTask(e) {
   e.preventDefault();
-  
-  incompleteTasksList.innerHTML+= `
-  <li>
-      <h4>${inputTask.value}</h4>
-      
-      <div class="actions">
-          <button class="edit">Edit</button>
-          <button class="delete">Delete</button>
-          <button class="done">Done</button>
-      </div>
-  </li> 
-  `; 
+
+  if(inputTask.value == '') {
+    alert('Hi! Please enter a task name.');
+  } else {
+    incompleteTasksList.innerHTML+= `
+      <li>
+          <h4>${inputTask.value}</h4>
+          
+          <div class="actions">
+              <button class="edit">Edit</button>
+              <button class="delete">Delete</button>
+              <button class="done">Done</button>
+          </div>
+      </li> 
+      `;
+  } 
 
   ClearInputTaskField();
 
@@ -199,15 +203,20 @@ function saveTask(e) {
   let grandparentElement = this.parentElement.parentElement;
   let newTaskName = grandparentElement.querySelector('input').value;
 
-  grandparentElement.innerHTML = `
-  <h4>${newTaskName}</h4>
-  
-  <div class="actions">
-      <button class="edit">Edit</button>
-      <button class="delete">Delete</button>
-      <button class="done">Done</button>
-  </div> 
-  `;
+  if(newTaskName == '') {
+    alert('Hi! Please enter the task\'s new name.');
+  } else {
+    grandparentElement.innerHTML = `
+      <h4>${newTaskName}</h4>
+      
+      <div class="actions">
+          <button class="edit">Edit</button>
+          <button class="delete">Delete</button>
+          <button class="done">Done</button>
+      </div> 
+      `;
+  }
+    
   rebindButtons();
 }
 /* Save Task End */
