@@ -25,6 +25,8 @@ function rebindButtons() {
   undoingDoneTask();
 
   editingTask();
+
+  savingTask();
 }
 /* Rebinding Buttons End */
 
@@ -148,7 +150,9 @@ function editingTask() {
   });
 }
 
-function editTask() {
+function editTask(e) {
+  e.preventDefault();
+
   let grandparentElement = this.parentElement.parentElement;
   let taskName = grandparentElement.querySelector('h4').innerHTML;
   let grandparentElementH4 = grandparentElement.querySelector('h4');
@@ -158,7 +162,7 @@ function editTask() {
   grandparentElement.innerHTML = `
   <form class="rename-task__container">
       <input type="text" name="rename-task" value="${taskName}" autocomplete="off" />
-      <button type="submit">Save</button>
+      <button type="submit" class="save">Save</button>
   </form>
   `;
 
@@ -167,6 +171,7 @@ function editTask() {
 
   moveCursorToEnd(taskRenameInput);
 
+  rebindButtons();
 }
 /* Edit Name End */
 
@@ -177,3 +182,32 @@ function editTask() {
 	}
 }
 /* Move Cursor to End */
+
+
+/* Save Task Start */
+function savingTask() {
+  let saveTaskButtons = Array.from(document.getElementsByClassName('save'));
+  
+  saveTaskButtons.forEach((saveTaskButton) => {
+    saveTaskButton.addEventListener('click', saveTask);
+  });
+}
+
+function saveTask(e) {  
+  e.preventDefault();
+
+  let grandparentElement = this.parentElement.parentElement;
+  let newTaskName = grandparentElement.querySelector('input').value;
+
+  grandparentElement.innerHTML = `
+  <h4>${newTaskName}</h4>
+  
+  <div class="actions">
+      <button class="edit">Edit</button>
+      <button class="delete">Delete</button>
+      <button class="done">Done</button>
+  </div> 
+  `;
+  rebindButtons();
+}
+/* Save Task End */
